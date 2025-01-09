@@ -135,40 +135,46 @@ include "koneksi.php";
     <section id="gallery" class="text-center p-5 bg-info-subtle">
       <div class="container">
         <h1 class="fw-bold display-4 pb-3">gallery</h1>
+        
+        
         <div id="carouselExample" class="carousel slide">
           <div class="carousel-inner">
+        <?php
+      $sql = "SELECT * FROM gallery ORDER BY tanggal DESC";
+      $hasil = $conn->query($sql); 
+
+      while($row = $hasil->fetch_assoc()){
+        ?>
             <div class="carousel-item active">
-              <img src="https://static.promediateknologi.id/crop/0x0:0x0/0x0/webp/photo/p2/222/2024/08/18/WhatsApp-Image-2024-08-17-at-140220-4284981413.jpeg" class="d-block w-100" alt="..." />
-            </div>
+              <img src="img/<?= $row["gambar"]?>" class="card-img-top" alt="..." />
+              </div>
             <div class="carousel-item">
-              <img src="https://static.promediateknologi.id/crop/0x0:0x0/0x0/webp/photo/p2/222/2024/08/18/WhatsApp-Image-2024-08-17-at-140220-4284981413.jpeg" class="d-block w-100" alt="..." />
+              <img src="img/<?= $row["gambar"]?>" class="card-img-top" alt="..." />
+              </div>
+        <?php
+      }
+      ?>
+              </div>
+              <button
+                class="carousel-control-prev"
+                type="button"
+                data-bs-target="#carouselExample"
+                data-bs-slide="prev"
+              >
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button
+                class="carousel-control-next"
+                type="button"
+                data-bs-target="#carouselExample"
+                data-bs-slide="next"
+              >
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
             </div>
-            <div class="carousel-item">
-              <img src="https://static.promediateknologi.id/crop/0x0:0x0/0x0/webp/photo/p2/222/2024/08/18/WhatsApp-Image-2024-08-17-at-140220-4284981413.jpeg" class="d-block w-100" alt="..." />
-            </div>
-            <div class="carousel-item">
-              <img src="https://static.promediateknologi.id/crop/0x0:0x0/0x0/webp/photo/p2/222/2024/08/18/WhatsApp-Image-2024-08-17-at-140220-4284981413.jpeg" class="d-block w-100" alt="..." />
-            </div>
-          </div>
-          <button
-            class="carousel-control-prev"
-            type="button"
-            data-bs-target="#carouselExample"
-            data-bs-slide="prev"
-          >
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button
-            class="carousel-control-next"
-            type="button"
-            data-bs-target="#carouselExample"
-            data-bs-slide="next"
-          >
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
-        </div>
+      </div>
       </div>
     </section>
     <!-- gallery end -->
