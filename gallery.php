@@ -18,6 +18,10 @@
                     </div>
                     <form method="post" action="" enctype="multipart/form-data">
                         <div class="modal-body">
+                            <!-- <div class="mb-3">
+                                <label for="formGroupExampleInput2" class="form-label">Tanggal</label>
+                                <input type="text" class="form-control" name="tanggal">
+                            </div> -->
                             <div class="mb-3">
                                 <label for="formGroupExampleInput2" class="form-label">Gambar</label>
                                 <input type="file" class="form-control" name="gambar">
@@ -107,14 +111,14 @@ if (isset($_POST['simpan'])) {
                                 username = ?
                                 WHERE id = ?");
 
-        $stmt->bind_param("sssssi", $tanggal, $gambar, $username, $id);
+        $stmt->bind_param("sssi", $tanggal, $gambar, $username, $id);
         $simpan = $stmt->execute();
     } else {
 		    //jika tidak ada id, lakukan insert data baru
         $stmt = $conn->prepare("INSERT INTO gallery (tanggal,gambar,username)
                                 VALUES (?,?,?)");
 
-        $stmt->bind_param("sssss", $tanggal, $gambar, $username);
+        $stmt->bind_param("sss", $tanggal, $gambar, $username);
         $simpan = $stmt->execute();
     }
 

@@ -14,18 +14,20 @@
                     $limit = 3;
                     $limit_start = ($hlm - 1) * $limit;
                     $no = $limit_start + 1;
-
+                    
                     $sql = "SELECT * FROM gallery ORDER BY tanggal DESC LIMIT $limit_start, $limit";
                     $hasil = $conn->query($sql);
                     while ($row = $hasil->fetch_assoc()) {
-                    ?>
+                        ?>
                         <tr>
+                            
                             <td><?= $no++ ?></td>
                             <td>
                                 <br>pada : <?= $row["tanggal"] ?>
                                 <br>oleh : <?= $row["username"] ?>
                             </td>
                             <td>
+                                <a href="#" title="view" data-bs-toggle="modal" data-bs-target="#modalView<?= $row["id"] ?>">
                                 <?php
                                 if ($row["gambar"] != '') {
                                     if (file_exists('img/' . $row["gambar"] . '')) {
@@ -35,6 +37,34 @@
                                     }
                                 }
                                 ?>
+                            <!-- Awal Modal View -->
+                            <div class="modal fade" id="modalView<?= $row["id"] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content p-2 w-full">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Detail Data</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <form method="post" action="" enctype="multipart/form-data">
+                                                <div class="modal-body">
+                                                    <div class="">
+                                                        <?php
+                                                        if ($row["gambar"] != '') {
+                                                            if (file_exists('img/' . $row["gambar"] . '')) {
+                                                        ?>
+                                                                <br><img src="img/<?= $row["gambar"] ?>" width="450">
+                                                        <?php
+                                                            }
+                                                        }
+                                                        ?>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Akhir Modal View -->
+                                </a>
                             </td>
                             <td>
                                 <a href="#" title="edit" class="badge rounded-pill text-bg-success" data-bs-toggle="modal" data-bs-target="#modalEdit<?= $row["id"] ?>"><i class="bi bi-pencil"></i></a>
@@ -104,8 +134,9 @@
                                 </div>
                                 <!-- Akhir Modal Hapus -->
                             </td>
+                            
                         </tr>
-                    <?php
+                            <?php
                     }
                     ?>
                 </tbody>
