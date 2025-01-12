@@ -14,7 +14,7 @@ if (!isset($_SESSION['username'])) {
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>My Daily Journal | Admin</title>
+    <title>My Daily Journal</title>
     <link rel="icon" href="img/logo.png" />
     <link
     rel="stylesheet"
@@ -71,13 +71,14 @@ if (!isset($_SESSION['username'])) {
                 <a class="nav-link" href="admin.php?page=gallery">Gallery</a>
             </li> 
             <li class="nav-item">
-                <a class="nav-link" href="index.php">Homepage</a>
+                <a class="nav-link fw-bold" href="index.php">Homepage</a>
             </li> 
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-danger fw-bold" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <?= $_SESSION['username']?>
                 </a>
                 <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="admin.php?page=profile">Profile <?= $_SESSION['username']?></a></li> 
                     <li><a class="dropdown-item" href="logout.php">Logout</a></li> 
                 </ul>
             </li> 
